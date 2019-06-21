@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html onclick="quit();return false">
+    <head>
+        <style>
+            #shutdownIcon {
+                height: auto;
+                width: 10%;
+                padding: 20px 30px 30px 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            }
+
+            #logoutIcon {
+                height: auto;
+                width: 10%;
+                padding: 24px 36px 26px 24px;
+                top: 51%;
+                left: 30%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            }
+
+            #rebootIcon {
+                height: auto;
+                width: 10%;
+                padding: 30px 30px 30px 35px;
+                top: 50%;
+                left: 70%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            }
+
+            .icon {
+                background-color: #999999;
+                transition: background-color 0.5s;
+                border-radius: 5%;
+            }
+
+            .icon:hover {
+                background-color: #444444;
+            }
+            body {
+                background-color: #999999;
+            }
+        </style>
+        
+        <script>
+            var isOnElement = false;
+
+            function shutdown() {
+                var request = new XMLHttpRequest()
+                request.open("GET", "http://127.0.0.1:3141/shutdown")
+                request.send(null)
+            }
+
+            function reboot() {
+                var request = new XMLHttpRequest()
+                request.open("GET", "http://127.0.0.1:3141/reboot")
+                request.send(null)
+            }
+
+            function logout() {
+                var request = new XMLHttpRequest()
+                request.open("GET", "http://127.0.0.1:3141/logout")
+                request.send(null)
+            }
+
+            function quit() {
+                if (!isOnElement) {
+                    var request = new XMLHttpRequest()
+                    request.open("GET", "http://127.0.0.1:3141/quit")
+                    request.send(null)
+                }
+            }
+
+            function toggleIsOnElement() {
+                isOnElement = !isOnElement;
+            }
+        </script>
+    </head>
+    <body>
+        <img src="/images/logout.png" alt="Logout" id="logoutIcon" class="icon" onclick="logout();return false" onmouseover="toggleIsOnElement()" onmouseout="toggleIsOnElement()">
+        <img src="/images/shutdown.png" alt="Shutdown" id="shutdownIcon" class="icon" onclick="shutdown();return false" onmouseover="toggleIsOnElement()" onmouseout="toggleIsOnElement()">
+        <img src="/images/reboot.png" alt="Reboot" id="rebootIcon" class="icon" onclick="reboot();return false" onmouseover="toggleIsOnElement()" onmouseout="toggleIsOnElement()">
+    </body>
+</html>  
