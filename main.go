@@ -62,7 +62,7 @@ func images(w http.ResponseWriter, r *http.Request) {
 
 func shutdown(w http.ResponseWriter, r *http.Request) {
 	println("shutdown")
-	cmd := exec.Command(dir + "/shutdown")
+	cmd := exec.Command(dir + "/shutdown.sh")
 	err := cmd.Run()
 	handle(err)
 }
